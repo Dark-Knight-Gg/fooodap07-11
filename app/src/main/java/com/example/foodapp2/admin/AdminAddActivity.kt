@@ -13,6 +13,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -24,6 +25,7 @@ import java.io.ByteArrayOutputStream
 
 class AdminAddActivity : AppCompatActivity() {
     private val database by lazy { Database.getInstance(this) }
+    private val addAdminViewModel by viewModels<AddAdminViewModel>()
     private val tag = "PermissionDemo"
     private val cameraRequestCode = 101
     private val folderRequestCode = 202
@@ -32,14 +34,16 @@ class AdminAddActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_admin_add)
-        initListener()
+        binding.addAdminViewModel = addAdminViewModel
+        observeEvent()
+        //initListener()
     }
 
     private val takePhoto: ActivityResultLauncher<Intent> =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == RESULT_OK) {
                 val bitmap: Bitmap = result.data?.extras?.get("data") as Bitmap
-                binding.addImg.setImageBitmap(bitmap)
+                addAdminViewModel.setPicture(bitmap)
             }
         }
     private val folderPhoto =
@@ -50,39 +54,59 @@ class AdminAddActivity : AppCompatActivity() {
             }
         }
 
-    private fun initListener() {
-
-        binding.addBtnCancle.setOnClickListener {
-            Toast.makeText(this@AdminAddActivity, "Đã huỷ!", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this@AdminAddActivity, AdminActivity::class.java)
+    //    private fun initListener() {
+//
+//        binding.addBtnCancle.setOnClickListener {
+//            Toast.makeText(this@AdminAddActivity, "Đã huỷ!", Toast.LENGTH_SHORT).show()
+//            val intent = Intent(this@AdminAddActivity, AdminActivity::class.java)
+//            startActivity(intent)
+//        }
+//
+//
+//        binding.addImgCamera.setOnClickListener {
+//            val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+//            setupPermissions()
+//            takePhoto.launch(intent)
+//        }
+//
+//        binding.addImgFoder.setOnClickListener {
+//            val intent = Intent(Intent.ACTION_PICK)
+//            folderPhoto.launch(intent)
+//        }
+//        binding.addBtnAdd.setOnClickListener {
+//            val name = binding.addEdtName.text.toString()
+//            val describe = binding.addEdtDescribe.text.toString()
+//            val price = binding.addEdtPrice.text.toString()
+//            val priceD: Double = price.toDouble()
+//            val bitmapDrawable: BitmapDrawable = binding.addImg.drawable as BitmapDrawable
+//            val bitmap: Bitmap = bitmapDrawable.bitmap
+//            val byteArrayOutputStream = ByteArrayOutputStream()
+//            bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
+//            val picture: ByteArray = byteArrayOutputStream.toByteArray()
+//            database.insert(name, describe, priceD, picture)
+//            Toast.makeText(this, "Đã thêm thành công!", Toast.LENGTH_SHORT)
+//                .show()
+//            val intent = Intent(this, AdminActivity::class.java)
+//            startActivity(intent)
+//        }
+//    }
+    private fun observeEvent() {
+        addAdminViewModel.isDestroy.observe(this) {
+            intent = Intent(this, AdminActivity::class.java)
+            startActivity(intent)
+        }
+        addAdminViewModel.isAddFood.observe(this) {
+            Toast.makeText(this, "Đã thêm thành công!", Toast.LENGTH_SHORT).show()
+            intent = Intent(this, AdminActivity::class.java)
             startActivity(intent)
         }
 
-        binding.addImgCamera.setOnClickListener {
-            val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-            setupPermissions()
-            takePhoto.launch(intent)
-        }
-
-        binding.addImgFoder.setOnClickListener {
-            val intent = Intent(Intent.ACTION_PICK)
-            folderPhoto.launch(intent)
-        }
-        binding.addBtnAdd.setOnClickListener {
-            val name = binding.addEdtName.text.toString()
-            val describe = binding.addEdtDescribe.text.toString()
-            val price = binding.addEdtPrice.text.toString()
-            val priceD: Double = price.toDouble()
-            val bitmapDrawable: BitmapDrawable = binding.addImg.drawable as BitmapDrawable
-            val bitmap: Bitmap = bitmapDrawable.bitmap
-            val byteArrayOutputStream = ByteArrayOutputStream()
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
-            val picture: ByteArray = byteArrayOutputStream.toByteArray()
-            database.insert(name, describe, priceD, picture)
-            Toast.makeText(this, "Đã thêm thành công!", Toast.LENGTH_SHORT)
-                .show()
-            val intent = Intent(this, AdminActivity::class.java)
-            startActivity(intent)
+        addAdminViewModel.isCamera.observe(this) {
+            it.getContentIfNotHandled()?.let {
+                intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                setupPermissions()
+                takePhoto.launch(intent)
+            }
         }
     }
 

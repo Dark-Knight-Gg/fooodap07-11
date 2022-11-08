@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
-
+<data>
+    <import type="com.example.foodapp2.client.ClientHistoryViewModel"/>
+    <variable
+        name="clientHistoryViewModel"
+        type="ClientHistoryViewModel" />
+</data>
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -9,6 +14,7 @@
         tools:context=".client.ClientHistoryActivity">
 
         <ImageView
+            android:onClick="@{()-> clientHistoryViewModel.onClickBack()}"
             android:id="@+id/avt6ImgBack"
             android:layout_width="35dp"
             android:layout_height="35dp"

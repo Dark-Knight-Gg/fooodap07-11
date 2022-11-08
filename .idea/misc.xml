@@ -3,6 +3,21 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android/Fooooodddd/fooooodddd/app/src/main/res/layout/activity_admin.xml" value="0.259375" />
+        <entry key="..\:/Android/Fooooodddd/fooooodddd/app/src/main/res/layout/activity_admin_add.xml" value="0.259375" />
+        <entry key="..\:/Android/Fooooodddd/fooooodddd/app/src/main/res/layout/activity_client.xml" value="0.259375" />
+        <entry key="..\:/Android/Fooooodddd/fooooodddd/app/src/main/res/layout/activity_client_history.xml" value="0.259375" />
+        <entry key="..\:/Android/Fooooodddd/fooooodddd/app/src/main/res/layout/activity_login.xml" value="0.264" />
+        <entry key="..\:/Android/Fooooodddd/fooooodddd/app/src/main/res/layout/activity_register.xml" value="0.259375" />
+        <entry key="..\:/Android/Fooooodddd/fooooodddd/app/src/main/res/layout/custom_recyclerview_admin.xml" value="0.259375" />
+        <entry key="..\:/Android/Fooooodddd/fooooodddd/app/src/main/res/layout/custom_recyclerview_history.xml" value="0.259375" />
+        <entry key="..\:/Android/Fooooodddd/fooooodddd/app/src/main/res/layout/custom_recyclerviewfood.xml" value="0.259375" />
+        <entry key="..\:/Android/Fooooodddd/fooooodddd/app/src/main/res/layout/custom_recyclerviewfood2.xml" value="0.259375" />
+        <entry key="..\:/Android/Fooooodddd/fooooodddd/app/src/main/res/layout/dialog_delete.xml" value="0.259375" />
+        <entry key="..\:/Android/Fooooodddd/fooooodddd/app/src/main/res/layout/dialog_delete_food.xml" value="0.259375" />
+        <entry key="..\:/Android/Fooooodddd/fooooodddd/app/src/main/res/layout/dialog_pay.xml" value="0.259375" />
+        <entry key="..\:/Android/Fooooodddd/fooooodddd/app/src/main/res/layout/fragment_food_list.xml" value="0.259375" />
+        <entry key="..\:/Android/Fooooodddd/fooooodddd/app/src/main/res/layout/fragment_your_food.xml" value="0.259375" />
         <entry key="..\:/FoodApp2/app/src/main/res/layout/activity_admin.xml" value="0.36666666666666664" />
         <entry key="..\:/FoodApp2/app/src/main/res/layout/activity_admin_add.xml" value="0.36666666666666664" />
         <entry key="..\:/FoodApp2/app/src/main/res/layout/activity_client.xml" value="0.36666666666666664" />

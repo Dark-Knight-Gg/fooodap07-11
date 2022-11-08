@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <import type="com.example.foodapp2.admin.AdminViewModel"/>
+        <variable
+            name="adminViewModel"
+            type="AdminViewModel" />
+    </data>
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -7,6 +13,7 @@
         tools:context=".admin.AdminActivity">
 
         <ImageView
+            android:onClick="@{()-> adminViewModel.onClickBack()}"
             android:id="@+id/adminIgBack"
             android:layout_width="40dp"
             android:layout_height="40dp"
@@ -17,6 +24,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
+            android:onClick="@{()-> adminViewModel.onClickToAdd()}"
             android:id="@+id/adminBtnAdd"
             android:layout_width="100dp"
             android:layout_height="wrap_content"

@@ -13,7 +13,6 @@ import com.example.foodapp2.admin.AdminActivity
 import com.example.foodapp2.database.Database
 import com.example.foodapp2.databinding.ActivityLoginBinding
 import com.example.foodapp2.register.RegisterActivity
-import com.example.foodapp2.viewmodel.LoginViewModel
 
 
 class LoginActivity : AppCompatActivity() {
@@ -36,8 +35,8 @@ class LoginActivity : AppCompatActivity() {
                     Toast.makeText(this, "Sai thông tin đăng nhập!", Toast.LENGTH_SHORT).show()
                 }
         })
-        loginViewModel.flag.observe(this, Observer{
-            if(it){
+        loginViewModel.navigateToRegister.observe(this, Observer{
+            it.getContentIfNotHandled()?.let{
                 intent = Intent(this, RegisterActivity::class.java)
                 startActivity(intent)
             }

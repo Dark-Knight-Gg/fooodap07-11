@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <data>
+
+        <import type="com.example.foodapp2.register.RegisterViewModel" />
+
+        <variable
+            name="registerViewModel"
+            type="com.example.foodapp2.register.RegisterViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -10,6 +19,7 @@
         tools:context=".register.RegisterActivity">
 
         <ImageView
+            android:onClick="@{()-> registerViewModel.onClickBack()}"
             android:id="@+id/registerImgBack"
             android:layout_width="40dp"
             android:layout_height="40dp"
@@ -42,6 +52,7 @@
             android:hint="@string/nh_p_t_n_t_i_kho_n"
             android:importantForAutofill="no"
             android:inputType="text"
+            android:text="@{registerViewModel.username}"
             android:textColor="#FAF9F9"
             android:textColorHint="#FFFFFF"
             android:textSize="20sp"
@@ -56,8 +67,8 @@
             android:layout_marginTop="15dp"
             android:layout_marginEnd="20dp"
             android:hint="@string/nh_p_m_t_kh_u_k1"
-            android:importantForAutofill="no"
             android:inputType="textPassword"
+            android:text="@={registerViewModel.password}"
             android:textColor="#FDFBFB"
             android:textColorHint="#FDFDFD"
             android:textSize="20sp"
@@ -71,8 +82,8 @@
             android:layout_marginTop="15dp"
             android:layout_marginEnd="20dp"
             android:hint="@string/nh_p_l_i_m_t_kh_u"
-            android:importantForAutofill="no"
             android:inputType="textPassword"
+            android:text="@{registerViewModel.repeatPassword}"
             android:textColor="#FAF9F9"
             android:textColorHint="#F8F4F4"
             android:textSize="20sp"
@@ -84,6 +95,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:text="@string/da_ng_k"
+            android:onClick="@{()-> registerViewModel.onClickRegister()}"
             android:textAllCaps="false"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"

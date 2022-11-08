@@ -17,14 +17,12 @@ import com.example.foodapp2.database.Database
 import com.example.foodapp2.databinding.FragmentYourFoodBinding
 import com.example.foodapp2.model.FoodOder
 import com.example.foodapp2.model.ItemViewModel
-import java.util.EnumSet.of
 
 class YourFoodFragment : Fragment() {
 
     private val viewModel by viewModels<ItemViewModel>()
-
     private val adapter by lazy {
-        FoodAdapterB() { deleteFood(it) }
+        FoodAdapterB { deleteFood(it) }
     }
     private val database by lazy { Database.getInstance(requireActivity()) }
     private lateinit var binding: FragmentYourFoodBinding

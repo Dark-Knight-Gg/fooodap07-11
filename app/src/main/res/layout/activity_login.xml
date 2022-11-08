@@ -4,13 +4,13 @@
     <data>
 
         <import type="com.example.foodapp2.model.User" />
-        <import type="com.example.foodapp2.viewmodel.LoginViewModel"/>
+        <import type="com.example.foodapp2.login.LoginViewModel"/>
         <variable
             name="user"
             type="User" />
         <variable
             name="loginViewModel"
-            type="LoginViewModel" />
+            type="com.example.foodapp2.login.LoginViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"

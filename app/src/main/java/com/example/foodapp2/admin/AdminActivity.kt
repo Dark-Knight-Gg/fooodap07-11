@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.view.Window
 import android.widget.Button
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,25 +25,40 @@ class AdminActivity : AppCompatActivity() {
     private val database: Database by lazy { Database.getInstance(this) }
     private val adp by lazy { AdminAdapter(){diaLogDelete(it)} }
     private lateinit var binding: ActivityAdminBinding
+    private val adminViewModel by viewModels<AdminViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_admin)
+        binding.adminViewModel = adminViewModel
         binding.adminRecyclerview.layoutManager = LinearLayoutManager(this)
         binding.adminRecyclerview.adapter = adp
-        initListener()
+        observeEvent()
         getData()
     }
-
-    private fun initListener() {
-        binding.adminIgBack.setOnClickListener {
-            intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
+    private fun observeEvent(){
+        adminViewModel.toBack.observe(this){
+            it.getContentIfNotHandled()?.let{
+                intent = Intent(this,LoginActivity::class.java)
+                startActivity(intent)
+            }
         }
-        binding.adminBtnAdd.setOnClickListener {
-            intent = Intent(this, AdminAddActivity::class.java)
-            startActivity(intent)
+        adminViewModel.navigateToAddAdmin.observe(this){
+            it.getContentIfNotHandled()?.let{
+                intent = Intent (this,AdminAddActivity::class.java)
+                startActivity(intent)
+            }
         }
     }
+//    private fun initListener() {
+//        binding.adminIgBack.setOnClickListener {
+//            intent = Intent(this, LoginActivity::class.java)
+//            startActivity(intent)
+//        }
+//        binding.adminBtnAdd.setOnClickListener {
+//            intent = Intent(this, AdminAddActivity::class.java)
+//            startActivity(intent)
+//        }
+//    }
 
     private fun getData() {
         listFood.clear()
